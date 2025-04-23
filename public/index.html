@@ -21,7 +21,7 @@
       gap: 48px;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       width: 100%;
       max-width: 1920px;
     }
@@ -58,11 +58,11 @@
   <div class="card-container">
     <div class="card">
       <h2>じゅんきのイメージ</h2>
-      <img src="wordcloud_pc_junki.png?ts=<?= Date.now() ?>" alt="Junki WordCloud" />
+      <img id="junki-img" alt="Junki WordCloud" />
     </div>
     <div class="card">
       <h2>ゆうみのイメージ</h2>
-      <img src="wordcloud_pc_yumi.png?ts=<?= Date.now() ?>" alt="Yumi WordCloud" />
+      <img id="yumi-img" alt="Yumi WordCloud" />
     </div>
   </div>
   <div class="timestamp">
@@ -70,10 +70,13 @@
   </div>
 
   <script>
+    const timestamp = new Date().getTime();
     document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
       year: "numeric", month: "2-digit", day: "2-digit",
       hour: "2-digit", minute: "2-digit", second: "2-digit"
     });
+    document.getElementById("junki-img").src = `wordcloud_pc_junki.png?ts=${timestamp}`;
+    document.getElementById("yumi-img").src = `wordcloud_pc_yumi.png?ts=${timestamp}`;
   </script>
 </body>
 </html>
