@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Wedding WordCloud</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      text-align: center;
+      background-color: #fdfdfd;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .item {
+      flex: 1;
+      max-width: 45%;
+    }
+    .label {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Wedding WordCloud</h1>
+  <div class="container">
+    <div class="item">
+      <div class="label">じゅんきのイメージ</div>
+      <img src="wordcloud_pc_junki.png" alt="Junki Wordcloud">
+    </div>
+    <div class="item">
+      <div class="label">ゆうみのイメージ</div>
+      <img src="wordcloud_pc_yumi.png" alt="Yumi Wordcloud">
+    </div>
+  </div>
+</body>
+</html>
