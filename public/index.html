@@ -2,49 +2,68 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Wedding WordCloud</title>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+  <title>WordCloud Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
+      background: #f9f9f9;
       font-family: 'Zen Maru Gothic', sans-serif;
-      text-align: center;
-      background-color: #fdfdfd;
-      margin: 0;
-      padding: 2rem;
-    }
-    .container {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+    }
+    .card-container {
+      display: flex;
+      gap: 24px;
       flex-wrap: wrap;
+      justify-content: center;
     }
-    .item {
-      flex: 1;
-      max-width: 45%;
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      text-align: center;
+      width: 500px;
     }
-    .label {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+    .card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
     }
-    img {
-      width: 100%;
-      height: auto;
+    .card img {
+      max-width: 100%;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .timestamp {
+      margin-top: 32px;
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <h1>Wedding WordCloud</h1>
-  <div class="container">
-    <div class="item">
-      <div class="label">じゅんきのイメージ</div>
-      <img src="wordcloud_pc_junki.png?ts=<?= Date.now() ?>" alt="Junki Wordcloud">
+  <div class="card-container">
+    <div class="card">
+      <h2>じゅんきのイメージ</h2>
+      <img src="wordcloud_pc_junki.png" alt="Junki WordCloud" />
     </div>
-    <div class="item">
-      <div class="label">ゆうみのイメージ</div>
-      <img src="wordcloud_pc_yumi.png?ts=<?= Date.now() ?>" alt="Yumi Wordcloud">
+    <div class="card">
+      <h2>ゆうみのイメージ</h2>
+      <img src="wordcloud_pc_yumi.png" alt="Yumi WordCloud" />
     </div>
   </div>
+  <div class="timestamp">
+    最終更新: <span id="updated-time"></span>
+  </div>
+
+  <script>
+    // GitHub Pages キャッシュ回避のための更新時刻表示（手動更新でもOK）
+    document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit"
+    });
+  </script>
 </body>
 </html>
