@@ -25,7 +25,7 @@ def fetch_messages(sheet_id):
 
 def generate_wc(text, filename):
     wc = WordCloud(
-        font_path = 'fonts/NotoSansJP-Black.ttf',
+        font_path = "fonts/NotoSansJP-Black.ttf",
         width=3840,
         height=2160,
         background_color='white'
