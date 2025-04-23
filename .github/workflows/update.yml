@@ -2,7 +2,7 @@ name: Generate and Deploy WordCloud
 
 on:
   schedule:
-    - cron: "*/1 * * * *"  # 毎1分（GitHub Actionsは1分未満は非対応）
+    - cron: "*/5 * * * *"  # 毎5分（GitHub Actionsは1分未満は非対応）
   workflow_dispatch:  # 手動実行も可能
 
 jobs:
