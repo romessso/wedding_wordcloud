@@ -32,3 +32,6 @@ jobs:
           publish_dir: ./public
           publish_branch: gh-pages
           force_orphan: true
+# コメントを追加して再コミット
+# 最終行にこれを足すだけでもOK
+# Updated to force schedule re-evaluation
