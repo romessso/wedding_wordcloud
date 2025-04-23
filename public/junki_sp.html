@@ -28,9 +28,38 @@
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     }
+    .timestamp {
+      margin-top: 32px;
+      font-size: 18px;
+      color: #555;
+      position: absolute;
+      bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <img src="wordcloud_sp_junki.png?ts=<?= Date.now() ?>" alt="Junki WordCloud SP">
+  <div class="timestamp">
+    最終更新: <span id="updated-time"></span>
+  </div>
+  <script>
+  function updateImagesAndTime() {
+    const timestamp = new Date().getTime();
+    document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit"
+    });
+    document.getElementById("junki-img").src = `wordcloud_pc_junki.png?ts=${timestamp}`;
+    document.getElementById("yumi-img").src = `wordcloud_pc_yumi.png?ts=${timestamp}`;
+  }
+
+  // 初回実行
+  updateImagesAndTime();
+
+  // 30秒ごとに再読み込み（必要に応じて変更可）
+  setInterval(updateImagesAndTime, 30000);
+</script>
 </body>
 </html>
