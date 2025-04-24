@@ -10,59 +10,44 @@
       margin: 0;
       padding: 0;
       height: 100%;
+      width: 100%;
       background: #fff;
       font-family: 'Zen Maru Gothic', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
       overflow: hidden;
     }
 
-    .scaler {
-      transform-origin: top center;
-      transition: transform 0.2s ease-out;
-      width: 480px; /* 基準の横幅 */
-    }
-
-    .content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 24px;
-    }
-
     img {
-      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      width: auto;
+      object-fit: contain;
+      border-radius: 0; /* カード感を無くす */
+      box-shadow: none;
     }
 
     .timestamp {
       position: absolute;
       bottom: 12px;
-      font-size: 16px;
+      font-size: 14px;
       color: #555;
       text-align: center;
       width: 100%;
+      background: rgba(255, 255, 255, 0.6);
     }
   </style>
 </head>
 <body>
-  <div class="scaler">
-    <div class="content">
-      <img id="junki-img" src="wordcloud_sp_junki.png" alt="Junki WordCloud SP">
-    </div>
-  </div>
-
+  <img id="junki-img" src="wordcloud_sp_junki.png" alt="Junki WordCloud SP">
   <div class="timestamp">
     最終更新: <span id="updated-time"></span>
   </div>
 
   <script>
-    let baseWidth = 480;
-    let baseHeight = 640; // h1を外したので高さを調整
-
     function updateImagesAndTime() {
       const timestamp = new Date().getTime();
       document.getElementById("junki-img").src = `wordcloud_sp_junki.png?ts=${timestamp}`;
@@ -72,18 +57,7 @@
       });
     }
 
-    function scaleToFit() {
-      const scaleX = window.innerWidth / baseWidth;
-      const scaleY = window.innerHeight / baseHeight;
-      const scale = Math.min(scaleX, scaleY, 1);
-      document.querySelector('.scaler').style.transform = `scale(${scale})`;
-    }
-
-    window.addEventListener('load', () => {
-      updateImagesAndTime();
-      scaleToFit();
-    });
-    window.addEventListener('resize', scaleToFit);
+    updateImagesAndTime();
     setInterval(updateImagesAndTime, 10000);
   </script>
 </body>
