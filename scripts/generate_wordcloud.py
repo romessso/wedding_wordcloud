@@ -39,7 +39,7 @@ messages_junki = fetch_messages(SPREADSHEET_ID_JUNKI)
 messages_yumi = fetch_messages(SPREADSHEET_ID_YUMI)
 
 # 画像生成
-generate_wc(messages_junki, 'wordcloud_pc_junki.png', 3840, 2160)
+generate_wc(messages_junki, 'wordcloud_pc_junki.png', 720, 960)
 generate_wc(messages_junki, 'wordcloud_sp_junki.png', 800, 1300)
-generate_wc(messages_yumi, 'wordcloud_pc_yumi.png', 3840, 2160)
+generate_wc(messages_yumi, 'wordcloud_pc_yumi.png', 720, 960)
 generate_wc(messages_yumi, 'wordcloud_sp_yumi.png', 800, 1300)
