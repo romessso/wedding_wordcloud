@@ -89,6 +89,8 @@
   </div>
 
   <script>
+    let baseHeight = 1040; // ← ここが調整ポイントです！
+
     function updateImagesAndTime() {
       const timestamp = new Date().getTime();
       document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
@@ -101,19 +103,24 @@
 
     function scaleToFit() {
       const baseWidth = 1720;
-      const baseHeight = 1000; // 画像とカードに合わせた想定最大高さ
       const scaleX = window.innerWidth / baseWidth;
       const scaleY = window.innerHeight / baseHeight;
       const scale = Math.min(scaleX, scaleY, 1);
       document.querySelector('.scaler').style.transform = `scale(${scale})`;
     }
 
+    // リアルタイム調整用
+    window.setBaseHeight = function(h) {
+      baseHeight = h;
+      scaleToFit();
+    };
+
     window.addEventListener('load', () => {
       updateImagesAndTime();
       scaleToFit();
     });
     window.addEventListener('resize', scaleToFit);
-    setInterval(updateImagesAndTime, 60000);
+    setInterval(updateImagesAndTime, 10000);
   </script>
 </body>
 </html>
