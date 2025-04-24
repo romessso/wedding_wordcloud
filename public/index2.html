@@ -9,8 +9,12 @@
     html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       background: #f9f9f9;
       font-family: 'Zen Maru Gothic', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
     }
 
@@ -100,7 +104,7 @@
       const baseHeight = 1040;
       const scaleX = window.innerWidth / baseWidth;
       const scaleY = window.innerHeight / baseHeight;
-      const scale = Math.min(scaleX, scaleY, 1); // 拡大しすぎないように
+      const scale = Math.min(scaleX, scaleY, 1);
       document.querySelector('.scaler').style.transform = `scale(${scale})`;
     }
 
@@ -109,7 +113,7 @@
       scaleToFit();
     });
     window.addEventListener('resize', scaleToFit);
-    setInterval(updateImagesAndTime, 60000); // 毎分更新
+    setInterval(updateImagesAndTime, 10000);
   </script>
 </body>
 </html>
