@@ -2,62 +2,89 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>じゅんきのイメージ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #fff;
-      font-family: 'Zen Maru Gothic', sans-serif;
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background: #fff;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .scaler {
+      transform-origin: top center;
+      transition: transform 0.2s ease-out;
+      width: 480px; /* 基準の横幅 */
+    }
+
+    .content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 24px;
     }
-    h1 {
-      font-size: 32px;
-      font-weight: 700;
-      margin: 24px 0;
-    }
+
     img {
-      max-width: 100%;
+      width: 100%;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     }
+
     .timestamp {
-      margin-top: 32px;
-      font-size: 18px;
-      color: #555;
       position: absolute;
-      bottom: 20px;
+      bottom: 12px;
+      font-size: 16px;
+      color: #555;
       text-align: center;
       width: 100%;
     }
   </style>
 </head>
 <body>
-  <img id="junki-img" src="wordcloud_sp_junki.png" alt="Junki WordCloud SP">
+  <div class="scaler">
+    <div class="content">
+      <img id="junki-img" src="wordcloud_sp_junki.png" alt="Junki WordCloud SP">
+    </div>
+  </div>
+
   <div class="timestamp">
     最終更新: <span id="updated-time"></span>
   </div>
 
   <script>
+    let baseWidth = 480;
+    let baseHeight = 640; // h1を外したので高さを調整
+
     function updateImagesAndTime() {
       const timestamp = new Date().getTime();
-      const img = document.getElementById("junki-img");
-      img.src = `wordcloud_sp_junki.png?ts=${timestamp}`; // キャッシュバスター付き
+      document.getElementById("junki-img").src = `wordcloud_sp_junki.png?ts=${timestamp}`;
       document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
         year: "numeric", month: "2-digit", day: "2-digit",
         hour: "2-digit", minute: "2-digit", second: "2-digit"
       });
     }
 
-    updateImagesAndTime();
-    setInterval(updateImagesAndTime, 10000); // 30秒ごとに再読み込み
+    function scaleToFit() {
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY, 1);
+      document.querySelector('.scaler').style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('load', () => {
+      updateImagesAndTime();
+      scaleToFit();
+    });
+    window.addEventListener('resize', scaleToFit);
+    setInterval(updateImagesAndTime, 10000);
   </script>
 </body>
 </html>
