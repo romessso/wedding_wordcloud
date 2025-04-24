@@ -24,6 +24,7 @@
       flex-wrap: nowrap;
       width: 100%;
       max-width: 1920px;
+      height: 80%; /* 高さを画面の80%に */
     }
     .card {
       background: white;
@@ -32,9 +33,13 @@
       padding: 32px;
       text-align: center;
       width: 800px;
+      height: 100%; /* コンテナに合わせて高さを100%に */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .card h2 {
-      font-size: 36px;
+      font-size: 60px;
       font-weight: 700;
       margin-bottom: 24px;
     }
@@ -42,6 +47,7 @@
       max-width: 100%;
       height: auto;
       border-radius: 16px;
+      flex-grow: 1; /* 残りの高さを埋めるようにする */
     }
     .timestamp {
       margin-top: 32px;
