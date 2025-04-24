@@ -21,17 +21,16 @@
     .scaler {
       transform-origin: top center;
       transition: transform 0.2s ease-out;
+      width: 1720px;
     }
 
     .card-container {
       display: flex;
       gap: 48px;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: nowrap;
-      width: 1720px;
-      height: 1000px;
-      padding-top: 40px;
+      height: auto;
     }
 
     .card {
@@ -41,7 +40,7 @@
       padding: 16px 32px 32px 32px;
       text-align: center;
       width: 800px;
-      height: 960px;
+      height: auto;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -59,11 +58,11 @@
       height: auto;
       object-fit: contain;
       border-radius: 16px;
-      flex-grow: 0;
     }
 
     .timestamp {
-      margin-top: 16px;
+      position: absolute;
+      bottom: 12px;
       font-size: 18px;
       color: #555;
       text-align: center;
@@ -83,9 +82,10 @@
         <img id="yumi-img" alt="Yumi WordCloud">
       </div>
     </div>
-    <div class="timestamp">
-      最終更新: <span id="updated-time"></span>
-    </div>
+  </div>
+
+  <div class="timestamp">
+    最終更新: <span id="updated-time"></span>
   </div>
 
   <script>
@@ -101,7 +101,7 @@
 
     function scaleToFit() {
       const baseWidth = 1720;
-      const baseHeight = 1040;
+      const baseHeight = 1000; // 画像とカードに合わせた想定最大高さ
       const scaleX = window.innerWidth / baseWidth;
       const scaleY = window.innerHeight / baseHeight;
       const scale = Math.min(scaleX, scaleY, 1);
@@ -113,7 +113,7 @@
       scaleToFit();
     });
     window.addEventListener('resize', scaleToFit);
-    setInterval(updateImagesAndTime, 10000);
+    setInterval(updateImagesAndTime, 60000);
   </script>
 </body>
 </html>
