@@ -29,6 +29,7 @@ def generate_wc(text, filename, width, height):
         width=width,
         height=height,
         prefer_horizontal=1,
+        colormap='tab10',
         background_color='white'
     ).generate(text)
     wc.to_file(f'public/{filename}')
