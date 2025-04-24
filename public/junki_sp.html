@@ -40,26 +40,25 @@
   </style>
 </head>
 <body>
-  <img src="wordcloud_sp_junki.png?ts=<?= Date.now() ?>" alt="Junki WordCloud SP">
+  <h1>じゅんきのイメージ</h1>
+  <img id="junki-img" src="wordcloud_sp_junki.png" alt="Junki WordCloud SP">
   <div class="timestamp">
     最終更新: <span id="updated-time"></span>
   </div>
+
   <script>
-  function updateImagesAndTime() {
-    const timestamp = new Date().getTime();
-    document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", second: "2-digit"
-    });
-    document.getElementById("junki-img").src = `wordcloud_pc_junki.png?ts=${timestamp}`;
-    document.getElementById("yumi-img").src = `wordcloud_pc_yumi.png?ts=${timestamp}`;
-  }
+    function updateImagesAndTime() {
+      const timestamp = new Date().getTime();
+      const img = document.getElementById("junki-img");
+      img.src = `wordcloud_sp_junki.png?ts=${timestamp}`; // キャッシュバスター付き
+      document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+    }
 
-  // 初回実行
-  updateImagesAndTime();
-
-  // 30秒ごとに再読み込み（必要に応じて変更可）
-  setInterval(updateImagesAndTime, 10000);
-</script>
+    updateImagesAndTime();
+    setInterval(updateImagesAndTime, 10000); // 30秒ごとに再読み込み
+  </script>
 </body>
 </html>
