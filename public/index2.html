@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>WordCloud Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      overflow: hidden;
+    }
+
+    .scaler {
+      transform-origin: top center;
+      transition: transform 0.2s ease-out;
+    }
+
+    .card-container {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 1720px;
+      height: 1000px;
+      padding-top: 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 16px 32px 32px 32px;
+      text-align: center;
+      width: 800px;
+      height: 960px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #555;
+      margin: 0 0 24px 0;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 16px;
+      flex-grow: 0;
+    }
+
+    .timestamp {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #555;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="scaler">
+    <div class="card-container">
+      <div class="card">
+        <h2>じゅんきのイメージ</h2>
+        <img id="junki-img" alt="Junki WordCloud">
+      </div>
+      <div class="card">
+        <h2>ゆうみのイメージ</h2>
+        <img id="yumi-img" alt="Yumi WordCloud">
+      </div>
+    </div>
+    <div class="timestamp">
+      最終更新: <span id="updated-time"></span>
+    </div>
+  </div>
+
+  <script>
+    function updateImagesAndTime() {
+      const timestamp = new Date().getTime();
+      document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+      document.getElementById("junki-img").src = `wordcloud_pc_junki.png?ts=${timestamp}`;
+      document.getElementById("yumi-img").src = `wordcloud_pc_yumi.png?ts=${timestamp}`;
+    }
+
+    function scaleToFit() {
+      const baseWidth = 1720;
+      const baseHeight = 1040;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY, 1); // 拡大しすぎないように
+      document.querySelector('.scaler').style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('load', () => {
+      updateImagesAndTime();
+      scaleToFit();
+    });
+    window.addEventListener('resize', scaleToFit);
+    setInterval(updateImagesAndTime, 10000); // 毎分更新
+  </script>
+</body>
+</html>
