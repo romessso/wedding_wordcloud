@@ -28,6 +28,7 @@ def generate_wc(text, filename, width, height):
         font_path='fonts/NotoSansJP-Black.ttf',
         width=width,
         height=height,
+        prefer_horizontal=1,
         background_color='white'
     ).generate(text)
     wc.to_file(f'public/{filename}')
