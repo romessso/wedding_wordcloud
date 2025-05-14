@@ -21,6 +21,7 @@ jobs:
       - name: Generate WordClouds
         env:
           GSHEET_CREDENTIALS_JSON: ${{ secrets.GSHEET_CREDENTIALS_JSON }}
+          DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
         run: python scripts/generate_wordcloud.py
 
       - name: Deploy to GitHub Pages
