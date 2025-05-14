@@ -48,6 +48,7 @@ generate_wc(messages_yumi, 'wordcloud_sp_yumi.png', 800, 1200)
 
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+import pytz
 from datetime import datetime
 
 # Drive APIクライアント
@@ -56,6 +57,7 @@ drive_service = build('drive', 'v3', credentials=creds)
 # アップロード関数
 def upload_to_drive(filepath):
     filename = os.path.basename(filepath)
+    jst = pytz.timezone('Asia/Tokyo')
     timestamp = datetime.now().strftime('%Y%m%d-%H%M')
     name_parts = filename.split('.')
     drive_filename = f'{name_parts[0]}_{timestamp}.{name_parts[1]}'
