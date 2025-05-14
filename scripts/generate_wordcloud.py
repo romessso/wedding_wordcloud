@@ -45,3 +45,33 @@ generate_wc(messages_junki, 'wordcloud_pc_junki.png', 720, 600)
 generate_wc(messages_junki, 'wordcloud_sp_junki.png', 800, 1200)
 generate_wc(messages_yumi, 'wordcloud_pc_yumi.png', 720, 600)
 generate_wc(messages_yumi, 'wordcloud_sp_yumi.png', 800, 1200)
+
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from datetime import datetime
+
+# Drive APIクライアント
+drive_service = build('drive', 'v3', credentials=creds)
+
+# アップロード関数
+def upload_to_drive(filepath):
+    filename = os.path.basename(filepath)
+    timestamp = datetime.now().strftime('%Y%m%d-%H%M')
+    name_parts = filename.split('.')
+    drive_filename = f'{name_parts[0]}_{timestamp}.{name_parts[1]}'
+
+    file_metadata = {
+        'name': drive_filename,
+        'parents': [os.environ['DRIVE_FOLDER_ID']],
+    }
+    media = MediaFileUpload(filepath, mimetype='image/png')
+    drive_service.files().create(
+        body=file_metadata,
+        media_body=media,
+        fields='id'
+    ).execute()
+
+# publicフォルダの画像すべてをアップロード
+for filename in os.listdir('public'):
+    if filename.endswith('.png'):
+        upload_to_drive(os.path.join('public', filename))
