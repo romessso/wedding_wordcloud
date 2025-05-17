@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>じゅんきのイメージ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: #f9f9f9;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      object-fit: contain;
+      padding: 16px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .timestamp {
+      position: absolute;
+      bottom: 12px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <img id="junki-img" src="wordcloud_sp_junki.png" alt="Junki WordCloud SP">
+  <div class="timestamp">
+    最終更新: <span id="updated-time"></span>
+  </div>
+
+  <script>
+    function updateImagesAndTime() {
+      const timestamp = new Date().getTime();
+      document.getElementById("junki-img").src = `wordcloud_sp_junki.png?ts=${timestamp}`;
+      document.getElementById("updated-time").textContent = new Date().toLocaleString("ja-JP", {
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+    }
+
+    updateImagesAndTime();
+    setInterval(updateImagesAndTime, 10000);
+  </script>
+</body>
+</html>
